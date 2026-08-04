@@ -14,14 +14,27 @@ Required fields:
 
 ## Clarifying questions
 
-Ask in this order and stop once decisions are sufficient:
+For a substantial project, collect one compact decision sheet rather than asking one question per turn. Extract known decisions from the conversation first, then ask only what is missing:
 
 1. What should the learner be able to explain, derive, implement, or evaluate at the end?
 2. What is already reliable knowledge, and which parts are uncertain?
-3. Which tradeoff matters most: breadth, proof depth, implementation depth, applications, or speed?
-4. What material, tools, source dates, language, and output constraints apply?
+3. How much time is available per session and across the whole route?
+4. Which tradeoff matters most: breadth, proof depth, implementation depth, applications, or speed?
+5. Which learning path and chapter outline should be used, and which topics are explicitly out of scope?
+6. What form should each unit take: explanation, proof, code, experiment, case, exercise, visual, or interaction?
+7. What voice, density, reader address, reference sample, and human review cadence should guide the prose?
+8. What material, tools, source dates, language, output formats, and visual theme apply?
 
-Do not ask the user to repeat information already present. If a reasonable default is safe, state it in the brief and continue. Ask for confirmation before committing to a large scope, a controversial interpretation, or a domain with safety/legal consequences.
+Present safe defaults beside each missing decision so the user can approve or change them. Do not ask the user to repeat information already present. Ask for confirmation before committing to a large scope, a controversial interpretation, or a domain with safety/legal consequences.
+
+Use these four checkpoints for long projects:
+
+- `brief`: learner, terminal performance, total/session time, scope, language, and constraints;
+- `path`: competency graph, chapter sequence, chapter durations, and outline;
+- `sample`: one representative section, exercise, visual, and rendering theme;
+- `release`: unresolved risks, human feedback, validation results, and deliverables.
+
+Do not block useful work between checkpoints when the user has already approved the relevant decision. Do not pause after every small section unless the user requests it.
 
 ## Capability graph
 
@@ -55,4 +68,4 @@ For each terminal performance:
 - add an exercise that requires the learner to perform, not merely recognize, the target;
 - record the relationship in `objective-matrix.csv`.
 
-If a paragraph supports no objective, prerequisite, example, transition, or reference, remove it or move it to optional context.
+If a paragraph supports no objective, prerequisite, example, transition, or reference, remove it or move it to optional context. Keep a small editorial style profile in the brief so a later chapter does not silently drift in register, density, or reader address.

@@ -1,0 +1,63 @@
+/* Theme overrides. The structural layout remains in screen.css and print.css. */
+:root[data-theme="technical"] {
+  --ink: #16202a;
+  --muted: #53616e;
+  --paper: #ffffff;
+  --wash: #f0f5f7;
+  --accent: #006d77;
+  --accent2: #c44536;
+  --rule: #cbd8dd;
+  --code: #15232d;
+}
+:root[data-theme="technical"] .cover {
+  background: linear-gradient(135deg, #12343b, #006d77);
+}
+:root[data-theme="technical"] h3 { color: #07545c; }
+
+:root[data-theme="editorial"] {
+  --ink: #2a2522;
+  --muted: #6d625d;
+  --paper: #fffdf8;
+  --wash: #f5eee7;
+  --accent: #9b2c2c;
+  --accent2: #c4772f;
+  --rule: #dfcfc1;
+  --code: #2b2725;
+}
+:root[data-theme="editorial"] .cover {
+  background: linear-gradient(135deg, #4b1f25, #9b2c2c);
+}
+:root[data-theme="editorial"] h3 { color: #71302f; }
+
+:root[data-theme="high-contrast"] {
+  --ink: #000000;
+  --muted: #303030;
+  --paper: #ffffff;
+  --wash: #f3f3f3;
+  --accent: #0037b3;
+  --accent2: #9b0000;
+  --rule: #000000;
+  --code: #111111;
+}
+:root[data-theme="high-contrast"] .cover {
+  background: #000000;
+}
+:root[data-theme="high-contrast"] a { text-decoration-thickness: 0.12em; }
+:root[data-theme="high-contrast"] .chapter-contract,
+:root[data-theme="high-contrast"] .diagnostic,
+:root[data-theme="high-contrast"] .motivation,
+:root[data-theme="high-contrast"] .takeaway,
+:root[data-theme="high-contrast"] .warning,
+:root[data-theme="high-contrast"] .definition,
+:root[data-theme="high-contrast"] .theorem,
+:root[data-theme="high-contrast"] .example,
+:root[data-theme="high-contrast"] .exercise,
+:root[data-theme="high-contrast"] .solution {
+  border-left-width: 6px;
+}
+
+@media print {
+  :root[data-theme="technical"] .cover { background: #12343b !important; }
+  :root[data-theme="editorial"] .cover { background: #4b1f25 !important; }
+  :root[data-theme="high-contrast"] .cover { background: #000000 !important; }
+}

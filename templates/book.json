@@ -1,5 +1,5 @@
 {
-  "metadata": {"title": "Replace with textbook title", "subtitle": "A rigorous path from prerequisites to capability", "author": "", "language": "en", "version": "0.1.0-draft", "page_size": "A4", "status": "draft"},
+  "metadata": {"title": "Replace with textbook title", "subtitle": "A rigorous path from prerequisites to capability", "author": "", "language": "en", "version": "0.1.0-draft", "page_size": "A4", "theme": "scholarly", "status": "draft"},
   "learner": {"summary": "Educated adult independent learner", "prerequisites": [], "terminal_performance": ""},
   "learning_path": [],
   "chapters": [{

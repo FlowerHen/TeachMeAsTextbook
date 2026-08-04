@@ -24,6 +24,8 @@ Use a stable learning arc, but do not fill slots mechanically:
 
 Use complete sentences around equations. A definition states its domain and conditions. A theorem states all assumptions and quantifiers. A proof names the definition or prior result used at each non-direct step. A computational claim records data, parameters, environment, and method. Mark pedagogical simplifications and their boundaries.
 
+Treat the structure below as a coverage contract, not a prose mold. Adapt section order when the learning problem requires it, and explain the deviation in the outline. Use concrete subjects and verbs, varied paragraph lengths, and transitions that express the actual relation between ideas. Avoid generic openings, inflated claims, repeated “not X, but Y” reveals, compulsory triads, and summaries that merely repeat headings. Never invent personal experience, classroom reactions, practitioner consensus, or learner understanding. See `references/human-style-and-feedback.md` for the full voice and feedback contract.
+
 ## Code chapters
 
 Every core code example includes:
@@ -58,4 +60,4 @@ Freeze problem statements before producing solutions. Generate solutions in a se
 
 ## Chapter close
 
-End with a concept relation map, key definitions/results, common mistakes, cumulative retrieval questions, a short self-check, and a bridge explaining why the next chapter follows. A chapter that becomes shorter and thinner near the end is a quality defect unless the path explicitly marks it as a short review chapter.
+End with a concept relation map, key definitions/results, common mistakes, cumulative retrieval questions, a short self-check, and a bridge explaining why the next chapter follows. A chapter that becomes shorter and thinner near the end is a quality defect unless the path explicitly marks it as a short review chapter. Human feedback about pacing, tone, examples, and cultural fit is editorial evidence, not a score to override: record it, apply it, and preserve the user's decision about the intended voice.

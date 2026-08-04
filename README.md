@@ -10,6 +10,7 @@ A reusable skill for producing rigorous, self-contained university-style textboo
 - Scales long content through Markdown-first Sub-agent workflows with explicit role boundaries and independent review gates.
 - Generates student and solution editions from frozen exercise records while keeping answer content physically out of the student edition.
 - Builds portable HTML and PDF outputs and runs strict structural and publication checks.
+- Supports `scholarly`, `technical`, `editorial`, and `high-contrast` rendering themes without content forks.
 
 ## Structure
 
@@ -19,6 +20,7 @@ references/
   chapter-authoring.md
   intake-and-planning.md
   output-contract.md
+  human-style-and-feedback.md
   research-and-review.md
   subagent-orchestration.md
   visual-and-interaction.md
@@ -28,7 +30,7 @@ evals/
 assets/
 ```
 
-Read `SKILL.md` first. Load reference documents only when the workflow reaches the corresponding phase. For long-form books, always read `references/subagent-orchestration.md` before dispatching authors, exercise writers, editors, or reviewers.
+Read `SKILL.md` first. Load reference documents only when the workflow reaches the corresponding phase. For long-form books, always read `references/subagent-orchestration.md` before dispatching authors, exercise writers, editors, or reviewers. Read `references/human-style-and-feedback.md` when voice, naturalness, pacing, or user editorial feedback matters.
 
 ## Requirements
 

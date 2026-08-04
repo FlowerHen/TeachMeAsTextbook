@@ -17,7 +17,7 @@ Classify claims as definition, theorem, derivation, observation, empirical resul
 
 ## Independent review records
 
-Use separate reports for facts, mathematics/science, code, pedagogy, and publication. Each finding has:
+Use separate reports for facts, mathematics/science, code, pedagogy, and publication. Load only the report guidance needed for the active pass; do not spend context on every review rubric at every stage. Each finding has:
 
 ```text
 severity: blocker | major | minor | note
@@ -28,7 +28,7 @@ fix: proposed correction
 verification: how closure was confirmed
 ```
 
-Do not mark a finding closed merely because prose was rewritten. Re-run the relevant check. An LLM pass is a second reading, not an independent expert or proof checker; state that residual risk.
+Do not mark a finding closed merely because prose was rewritten. Re-run the relevant check. An LLM pass is a second reading, not an independent expert or proof checker; state that residual risk. Separate mechanical blockers from editorial feedback. For voice, pacing, examples, cultural fit, and perceived naturalness, the user's explicit feedback is authoritative; record disagreement instead of silently overriding it.
 
 ## Blocking rules
 
@@ -42,4 +42,4 @@ Block a verified edition when any of these holds:
 - a student file contains full solutions;
 - HTML/PDF has broken formulas, missing figures, clipped content, or unresolved placeholders.
 
-If a blocker cannot be resolved, label the package `draft / not verified` and list it prominently.
+If a blocker cannot be resolved, label the package `draft / not verified` and list it prominently. A strict gate should protect correctness, safety, reproducibility, and answer separation without forcing every subjective style preference through an artificial numeric threshold.

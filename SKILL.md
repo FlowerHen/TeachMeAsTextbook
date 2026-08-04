@@ -1,6 +1,6 @@
 ---
 name: textbook-creator
-description: Create rigorous, self-contained university-style textbooks from arbitrary source material for science, mathematics, and advanced programming. Use whenever the user asks to learn a difficult subject systematically, build a course or textbook, explain prerequisites, produce a long-form study guide, coordinate Sub-agents for chapter or exercise production, or export a textbook and separate answer manual as HTML/PDF. The skill researches and normalizes background knowledge, builds a prerequisite graph and linear learning path, scales long content through Markdown-first Sub-agent workflows with independent review and rejection gates, writes chapter-length explanations with intuition, formal definitions, proofs or mechanisms, worked examples, exercises, visualizations, and code, then performs evidence, mathematics, code, pedagogy, and rendering reviews before delivery.
+description: Create rigorous, self-contained university-style textbooks from arbitrary source material for science, mathematics, and advanced programming. Use whenever the user asks to learn a difficult subject systematically, build a course or textbook, explain prerequisites, produce a long-form study guide, coordinate Sub-agents for chapter or exercise production, improve human writing quality, or export a textbook and separate answer manual as HTML/PDF. The skill researches and normalizes background knowledge, builds a prerequisite graph and linear learning path, uses selective-context Markdown-first workflows for long content, calibrates an authorial voice with human checkpoints, supports scenario-specific rendering themes, and performs risk-scaled evidence, mathematics, code, pedagogy, and publication reviews before delivery.
 license: LICENSE.txt
 compatibility: Requires Node.js 18+. For PDF export, requires Microsoft Edge, Google Chrome, or Chromium. Run npm install in this skill directory for KaTeX, Highlight.js, and Playwright Core.
 ---
@@ -21,23 +21,46 @@ Create a teachable textbook, not an expanded list of notes. The learner is an ed
 - Treat Sub-agents as bounded authors or reviewers, not as independent publishers. The main Agent owns the learning graph, task decomposition, merge, conflict resolution, and final gate.
 - For long content, use Markdown as the intermediate authoring format. Do not ask multiple Sub-agents to write the same final JSON, HTML, build script, or shared directory.
 - Read `references/subagent-orchestration.md` whenever the request involves long-form scaling, chapter parallelism, exercise generation, separate student/solution editing, or Sub-agent delegation.
+- Read `references/human-style-and-feedback.md` whenever prose quality, voice, naturalness, pacing, human review, or user editing feedback matters. Human editorial preference outranks an automated style preference.
+- Load references selectively by phase. Do not put every reference document into context at once; the active phase determines the minimum context pack.
 
 ## Workflow and gates
 
+### Context budget
+
+Load the smallest reference set that can make the current decision. Use this phase map instead of loading the entire skill bundle:
+
+| Phase | Minimum references |
+|---|---|
+| Intake | `intake-and-planning.md`, `templates/brief.json` |
+| Research/path | `intake-and-planning.md`, `research-and-review.md` |
+| Outline/chapter | `chapter-authoring.md`, `intake-and-planning.md` |
+| Voice/sample | `human-style-and-feedback.md`, `visual-and-interaction.md` |
+| Sub-agent scale | `subagent-orchestration.md`, `chapter-authoring.md` |
+| Review | `research-and-review.md` plus the rubric for the active review |
+| Build/render | `output-contract.md`, `visual-and-interaction.md` |
+
+Load section-specific references only when the active task needs them. Return to the source of truth rather than copying full references into every Sub-agent prompt. Pass a compact task packet: relevant objective, prerequisites, local terminology, source version, output contract, and review criteria.
+
 ### 1. Intake and interview
 
-Read `references/intake-and-planning.md`. Extract what is already known from the conversation, then ask only for missing decisions. At minimum record:
+Read `references/intake-and-planning.md`. Extract what is already known from the conversation, then present one compact decision sheet instead of scattering questions across many turns. For a long project, do not begin full content generation until the user has confirmed or accepted defaults for the learner, terminal capability, study time, scope, learning path, outline, writing mode, review checkpoints, and output/rendering preferences. Ask only for decisions that materially change the work.
+
+At minimum record:
 
 - learner background, prior courses, mathematics maturity, programming languages and tools;
 - target capability or final project, desired depth, time budget, language, and output formats;
 - user-provided material, preferred sources, date sensitivity, exclusions, privacy boundaries;
-- whether proofs, implementation, experiments, historical context, or applications are required.
+- whether proofs, implementation, experiments, historical context, or applications are required;
+- voice/register, reader address, density, reference samples, human review cadence, and preferred render theme when prose or publication style matters.
 
-If target, audience, or safety boundaries are materially ambiguous, stop and ask. Otherwise write assumptions explicitly in `brief.json`; do not hide them.
+If target, audience, terminal capability, study budget, or safety boundaries are materially ambiguous, stop and ask. Otherwise present assumptions for confirmation and write them explicitly in `brief.json`; do not hide them.
+
+Use four human checkpoints for long content: brief, path, representative voice/visual sample, and release. Do not interrupt after every section unless the user requests that cadence.
 
 ### 2. Research and learning design
 
-Read `references/research-and-review.md` and `references/chapter-authoring.md`. If the book is long content or will use Sub-agents, also read `references/subagent-orchestration.md`. Produce these internal artifacts before prose:
+Read `references/research-and-review.md` and `references/chapter-authoring.md`. Read `references/human-style-and-feedback.md` when the project has a non-default voice, user writing samples, or a human-naturalness requirement. If the book is long content or will use Sub-agents, also read `references/subagent-orchestration.md`. Load only the references needed for the current phase. Produce these internal artifacts before prose:
 
 1. `brief.json` — learner, scope, constraints, assumptions, and success criteria.
 2. `research/source-register.md` — authoritative sources with URL, access date, authority reason, claim supported, and limitations.
@@ -58,6 +81,8 @@ Draft the outline before full chapters. Each chapter must have a purpose in the 
 
 Use the chapter contract in `references/chapter-authoring.md`. For long content, complete the topic sequence “outline -> content composition decision -> visualization/case analysis -> concrete Markdown production” before merging into the publication model. Assign independent Sub-agents to distinct Markdown files or sections, then have the main Agent merge and normalize them. Never treat a missing, timed-out, summary-only, malformed, or artifact-capture-failed Sub-agent response as a valid chapter package.
 
+Use the confirmed voice contract and representative sample. Write like a situated human teacher: vary paragraph rhythm, use concrete subjects and verbs, explain decisions and uncertainty, and avoid repeated rhetorical slots. The chapter contract guarantees coverage; it is not a formula that every section must mechanically fill. Use `references/human-style-and-feedback.md` for the reasoning/teaching/voice pass.
+
 Each core chapter normally follows:
 
 1. Chapter contract and entry diagnostic.
@@ -75,7 +100,7 @@ For mathematics, make quantifiers, domains, assumptions, and proof dependencies 
 
 ### 5. Visual and interactive layer
 
-Read `references/visual-and-interaction.md`. Every major concept should have a reasoned visual choice: flow, dependency graph, timeline, comparison, geometry, state machine, algorithm trace, plot, or table. Use inline SVG or local assets; no remote CDN is allowed in a portable build.
+Read `references/visual-and-interaction.md`. Every major concept should have a reasoned visual choice: flow, dependency graph, timeline, comparison, geometry, state machine, algorithm trace, plot, or table. Use inline SVG or local assets; no remote CDN is allowed in a portable build. Select a rendering theme from the supported theme set based on audience and medium, and confirm it at the representative-sample checkpoint.
 
 Interactive elements should be progressive enhancement, not a requirement for understanding. Use accessible `<details>`, tabs with keyboard support, self-check prompts, code-copy controls, and diagrams with captions and text alternatives. Every interactive visualization needs a static print fallback and a meaningful no-JavaScript rendering.
 
@@ -91,9 +116,11 @@ Run five passes against the frozen source:
 
 For long content, perform these reviews as independent read-only passes after Markdown drafting. Return only `pass`, `revise`, or `block`; a `revise`/`block` result must return to the author or main Agent with a precise location, evidence, fix, and recheck. Do not let the main Agent replace missing substance with a summary. Record each finding as `severity`, `location`, `problem`, `evidence`, `fix`, and `verification`. Blocking findings must be fixed and rechecked. If a tool or expert review is unavailable, report the limitation prominently.
 
+Separate mechanical gates from editorial judgment. Missing IDs, answer leakage, broken formulas, unsupported central claims, and non-running core code are blockers. Voice, pacing, example choice, cultural fit, and perceived naturalness are editorial findings: surface them to the user, preserve their decision, and do not convert an Agent score into approval. The user is the authority for the intended voice and teaching feel.
+
 ### 7. Build and deliver
 
-Read `references/output-contract.md`. Before publication, the main Agent must freeze the Markdown source, normalize stable IDs, generate exercises from the frozen problem bank, and generate the answer manual independently. Student-editor inputs must exclude solution fields and solution-only IDs. Create a project using `templates/book.json` and `templates/chapter.md`, then run:
+Read `references/output-contract.md`. Before publication, the main Agent must freeze the Markdown source, normalize stable IDs, generate exercises from the frozen problem bank, and generate the answer manual independently. Student-editor inputs must exclude solution fields and solution-only IDs. Choose `metadata.theme` from the supported rendering themes and verify both screen and print behavior. Create a project using `templates/book.json` and `templates/chapter.md`, then run:
 
 ```bash
 npm install
@@ -121,8 +148,8 @@ The builder must physically omit solutions from the student output. If PDF tooli
 
 ## Output behavior
 
-For a new request, first present a compact intake summary and missing questions. After the answers, show the competency graph summary and learning path for approval. During production, provide chapter checkpoints rather than dumping an unreviewed book. At completion, report the files, validation status, unresolved risks, source coverage, code execution coverage, and the exact commands used.
+For a new request, first present a compact intake summary and one decision sheet covering learner, terminal performance, study time, scope, learning path, outline, writing mode, review cadence, and rendering theme. After confirmation, show the competency graph summary and learning path for approval. Before scaling full chapters, show one representative section and one visual/theme sample for human voice and layout feedback. During production, provide meaningful checkpoints rather than dumping an unreviewed book. At completion, report the files, theme, validation status, unresolved risks, source coverage, code execution coverage, human feedback still open, and the exact commands used.
 
 ## Evaluation guidance
 
-For this Skill, qualitative review matters more than raw token count, but structural expectations are objectively testable. Use `evals/evals.json` as a starting set. Test at least one scientific topic, one mathematical topic, and one advanced programming topic. Compare with-skill and without-skill runs, then review both the rendered textbook and the answer separation. Do not reward a long answer that lacks a valid path, evidence, runnable examples, or independently checked solutions.
+For this Skill, human editorial review matters more than raw token count or an Agent-generated style score, while structural expectations remain objectively testable. Use `evals/evals.json` as a starting set. Test at least one scientific topic, one mathematical topic, one advanced programming topic, and one long-content orchestration case. Compare with-skill and without-skill runs, then inspect representative prose for rhythm, specificity, and voice fit, along with rendered themes and answer separation. Do not reward a long answer that lacks a valid path, evidence, runnable examples, human feedback incorporation, or independently checked solutions.

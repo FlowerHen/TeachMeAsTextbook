@@ -11,7 +11,7 @@ book-project/
 └── dist/
 ```
 
-`book.json` is the source of truth for metadata, chapters, sections, exercises, solutions, references, and review status. Use `templates/book.json` as the minimum shape. Stable IDs must remain unchanged across revisions.
+`book.json` is the source of truth for metadata, chapters, sections, exercises, solutions, references, review status, and rendering theme. Use `templates/book.json` as the minimum shape. Stable IDs must remain unchanged across revisions. Supported themes are `scholarly`, `technical`, `editorial`, and `high-contrast`; choose one based on audience, content, and medium rather than treating themes as decoration.
 
 ## Build contract
 
@@ -23,7 +23,7 @@ book-project/
 - inline local CSS, JS, images, and SVG for a portable HTML;
 - generate student and answer DOMs from the same exercise records;
 - omit `solution_html`, `answer_html`, and solution-only IDs from student output;
-- write a manifest with input/tool hashes but no absolute local paths.
+- write a manifest with input/tool hashes, selected theme, and no absolute local paths.
 
 Use `--allow-unrendered` only for drafts. A verified build fails on unresolved math, missing local assets, remote URLs, placeholder text, or malformed exercise records.
 
@@ -33,7 +33,7 @@ Use `--allow-unrendered` only for drafts. A verified build fails on unresolved m
 
 ## Validation contract
 
-`node scripts/verify.mjs --project <dir> --strict` checks both HTMLs and PDFs, answer separation, heading structure, links, unresolved markers, remote resources, local path leakage, required IDs, and basic paper metadata. Visual review still requires opening the HTML and inspecting representative desktop, narrow, and PDF pages.
+`node scripts/verify.mjs --project <dir> --strict` checks both HTMLs and PDFs, answer separation, heading structure, links, unresolved markers, remote resources, local path leakage, required IDs, and basic paper metadata. Visual review still requires opening the HTML and inspecting representative desktop, narrow, and PDF pages for the selected theme. Check that the theme changes visual treatment without changing content hierarchy, contrast, answer separation, or print readability.
 
 ## Failure reporting
 
