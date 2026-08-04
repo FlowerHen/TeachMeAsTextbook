@@ -1,0 +1,9 @@
+{
+  "learner": {"education": "higher education", "domain_experience": [], "mathematics": "unknown", "programming": [], "language": "auto", "accessibility": []},
+  "goal": {"terminal_performance": "", "target_depth": "university textbook", "final_artifact": "", "out_of_scope": []},
+  "constraints": {"study_time_minutes_per_session": null, "total_study_hours": null, "date_cutoff": null, "output_formats": ["html", "pdf"], "page_size": "A4"},
+  "materials": {"must_use": [], "supporting": [], "exclude": [], "privacy": []},
+  "quality": {"evidence_level": "university-textbook", "proof_policy": "explicit assumptions and steps", "code_execution": "required for core examples", "answer_manual": true, "interactive_offline": true},
+  "assumptions": [],
+  "status": "draft"
+}

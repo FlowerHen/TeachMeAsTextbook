@@ -1,0 +1,14 @@
+{
+  "metadata": {"title": "Replace with textbook title", "subtitle": "A rigorous path from prerequisites to capability", "author": "", "language": "en", "version": "0.1.0-draft", "page_size": "A4", "status": "draft"},
+  "learner": {"summary": "Educated adult independent learner", "prerequisites": [], "terminal_performance": ""},
+  "learning_path": [],
+  "chapters": [{
+    "id": "ch01", "number": 1, "title": "Chapter title", "summary": "Why this chapter exists in the path.", "prerequisites": [], "estimated_minutes": 90,
+    "objectives": [{"id": "ch01.obj01", "text": "The learner can ...", "assessment_ids": ["ch01.ex01"]}],
+    "diagnostic_html": "<p>Write a short diagnostic here.</p>",
+    "sections": [{"id": "ch01.s01", "title": "Motivation", "html": "<p>Replace this section.</p>", "visual_html": ""}],
+    "exercises": [{"id": "ch01.ex01", "type": "concept", "difficulty": 1, "objective_ids": ["ch01.obj01"], "expected_minutes": 10, "prompt_html": "<p>Exercise prompt.</p>", "answer_html": "<p>Final answer.</p>", "solution_html": "<p>Strategy, steps, verification, and common error.</p>"}]
+  }],
+  "references": [],
+  "review": {"facts": "pending", "math": "pending", "code": "pending", "pedagogy": "pending", "publication": "pending"}
+}

@@ -1,0 +1,1 @@
+This skill package contains original instructions and build templates created for the user. Use and modify it within the user's Pi skill directory. Third-party dependencies referenced by package.json retain their own licenses.
