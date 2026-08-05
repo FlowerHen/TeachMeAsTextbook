@@ -22,6 +22,7 @@ Create a teachable textbook, not an expanded list of notes. The learner is an ed
 - For long content, use Markdown as the intermediate authoring format. Do not ask multiple Sub-agents to write the same final JSON, HTML, build script, or shared directory.
 - Read `references/subagent-orchestration.md` whenever the request involves long-form scaling, chapter parallelism, exercise generation, separate student/solution editing, or Sub-agent delegation.
 - Read `references/human-style-and-feedback.md` whenever prose quality, voice, naturalness, pacing, human review, or user editing feedback matters. Human editorial preference outranks an automated style preference.
+- Read `references/review-profiles.md` before choosing review depth. Use a risk-scaled profile instead of running every possible check for every document.
 - Load references selectively by phase. Do not put every reference document into context at once; the active phase determines the minimum context pack.
 
 ## Workflow and gates
@@ -37,7 +38,7 @@ Load the smallest reference set that can make the current decision. Use this pha
 | Outline/chapter | `chapter-authoring.md`, `intake-and-planning.md` |
 | Voice/sample | `human-style-and-feedback.md`, `visual-and-interaction.md` |
 | Sub-agent scale | `subagent-orchestration.md`, `chapter-authoring.md` |
-| Review | `research-and-review.md` plus the rubric for the active review |
+| Review | `review-profiles.md`, `research-and-review.md`, plus the rubric for the active review |
 | Build/render | `output-contract.md`, `visual-and-interaction.md` |
 
 Load section-specific references only when the active task needs them. Return to the source of truth rather than copying full references into every Sub-agent prompt. Pass a compact task packet: relevant objective, prerequisites, local terminology, source version, output contract, and review criteria.
@@ -106,7 +107,7 @@ Interactive elements should be progressive enhancement, not a requirement for un
 
 ### 6. Independent review
 
-Run five passes against the frozen source:
+Read `references/review-profiles.md` and choose `light`, `standard`, or `high-stakes` before reviewing. Run only the checks that match the selected profile and the actual content risks:
 
 - **Evidence:** every nontrivial or time-sensitive claim has an appropriate source, date, scope, and confidence.
 - **Mathematics/science:** recalculate equations and answers; inspect definitions, assumptions, units, limiting cases, counterexamples, and proof dependencies.
@@ -114,9 +115,9 @@ Run five passes against the frozen source:
 - **Pedagogy:** verify objective-to-content-to-assessment coverage, prerequisite order, difficulty progression, explanations between examples and exercises, and cumulative retrieval.
 - **Publication:** build both HTMLs and PDFs; check headings, links, formulas, fonts, figures, page breaks, answer separation, and absence of external requests.
 
-For long content, perform these reviews as independent read-only passes after Markdown drafting. Return only `pass`, `revise`, or `block`; a `revise`/`block` result must return to the author or main Agent with a precise location, evidence, fix, and recheck. Do not let the main Agent replace missing substance with a summary. Record each finding as `severity`, `location`, `problem`, `evidence`, `fix`, and `verification`. Blocking findings must be fixed and rechecked. If a tool or expert review is unavailable, report the limitation prominently.
+For long content, perform relevant reviews as independent read-only passes after Markdown drafting. Return `pass`, `revise`, or `block`; a `revise`/`block` result must return to the author or main Agent with a precise location, evidence, fix, and recheck. Do not let the main Agent replace missing substance with a summary. Record each finding as `severity`, `location`, `problem`, `evidence`, `fix`, and `verification`. Blockers must be fixed and rechecked. If a tool or expert review is unavailable, report the limitation prominently.
 
-Separate mechanical gates from editorial judgment. Missing IDs, answer leakage, broken formulas, unsupported central claims, and non-running core code are blockers. Voice, pacing, example choice, cultural fit, and perceived naturalness are editorial findings: surface them to the user, preserve their decision, and do not convert an Agent score into approval. The user is the authority for the intended voice and teaching feel.
+Separate mechanical gates from editorial judgment. Missing IDs, answer leakage, broken formulas, unsupported central claims, and non-running core code are blockers. Voice, pacing, example choice, cultural fit, and perceived naturalness are editorial findings: surface them to the user, preserve their decision, and do not convert an Agent score into approval. The user is the authority for the intended voice and teaching feel. Do not label a package `verified` until required human checkpoints are complete; use `agent-reviewed` when only Agent and automated checks have passed.
 
 ### 7. Build and deliver
 
@@ -148,7 +149,7 @@ The builder must physically omit solutions from the student output. If PDF tooli
 
 ## Output behavior
 
-For a new request, first present a compact intake summary and one decision sheet covering learner, terminal performance, study time, scope, learning path, outline, writing mode, review cadence, and rendering theme. After confirmation, show the competency graph summary and learning path for approval. Before scaling full chapters, show one representative section and one visual/theme sample for human voice and layout feedback. During production, provide meaningful checkpoints rather than dumping an unreviewed book. At completion, report the files, theme, validation status, unresolved risks, source coverage, code execution coverage, human feedback still open, and the exact commands used.
+For a new request, first present a compact intake summary and one decision sheet covering learner, terminal performance, study time, scope, learning path, outline, writing mode, review cadence, and rendering theme. After confirmation, show the competency graph summary and learning path for approval. Before scaling full chapters, show one representative section and one visual/theme sample for human voice and layout feedback. During production, provide meaningful checkpoints rather than dumping an unreviewed book. At completion, report the files, selected review profile, theme, validation status, unresolved risks, source coverage, code execution coverage, human feedback still open, human approval status, and the exact commands used.
 
 ## Evaluation guidance
 

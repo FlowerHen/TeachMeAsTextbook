@@ -22,6 +22,7 @@ references/
   output-contract.md
   human-style-and-feedback.md
   research-and-review.md
+  review-profiles.md
   subagent-orchestration.md
   visual-and-interaction.md
 scripts/
@@ -45,11 +46,15 @@ Run these commands from a textbook project that follows the output contract:
 ```bash
 npm install
 node scripts/build.mjs --project path/to/book-project
+# Optional theme preview:
+node scripts/build.mjs --project path/to/book-project --theme technical
 node scripts/print-pdf.mjs --project path/to/book-project
 node scripts/verify.mjs --project path/to/book-project --strict
+# For the theme preview above:
+node scripts/verify.mjs --project path/to/book-project --theme technical --strict
 ```
 
-Code examples and experiments must be marked `not executed` when the declared environment cannot run them. A generated document is not `verified` until blocking evidence, mathematics, code, pedagogy, and publication findings are closed.
+Code examples and experiments must be marked `not executed` when the declared environment cannot run them. A generated document is not `verified` until the selected review profile, human checkpoints, and blocking evidence, mathematics, code, pedagogy, and publication findings are complete.
 
 ## Sub-agent Policy
 

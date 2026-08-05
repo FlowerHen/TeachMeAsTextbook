@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.3.1 - 2026-08-04
+
+### Fixed
+
+- `verify.mjs` now accepts the same `--theme` override as `build.mjs`, so theme previews can pass strict validation without mutating the source book metadata.
+
+## 0.3.0 - 2026-08-04
+
+### Added
+
+- Risk-scaled `light`, `standard`, and `high-stakes` review profiles.
+- Separate `draft`, `agent-reviewed`, `human-reviewed`, and `verified` release statuses.
+- Command-line theme preview with `--theme` and strict theme consistency validation.
+- Regression evaluations for short-content triage and human checkpoint planning.
+
+### Changed
+
+- Review depth is selected by actual content risk instead of applying every possible pass to every document.
+- Human feedback is now a release-state requirement where the selected profile requires it; Agent self-review cannot silently upgrade the package.
+- Mechanical blockers and editorial preferences are explicitly separated.
+
 ## 0.2.0 - 2026-08-04
 
 ### Added

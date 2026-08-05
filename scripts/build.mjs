@@ -8,6 +8,7 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const skillRoot = path.resolve(here, "..");
 const arg = (name, fallback = null) => { const i = process.argv.indexOf(name); return i >= 0 ? process.argv[i + 1] : fallback; };
 const project = path.resolve(arg("--project", "."));
+const themeOverride = arg("--theme");
 const allowUnrendered = process.argv.includes("--allow-unrendered");
 const supportedThemes = new Set(["scholarly", "technical", "editorial", "high-contrast"]);
 const read = p => fs.readFile(p, "utf8");
@@ -82,7 +83,9 @@ async function makeHtml(book, includeSolutions, mods) {
   return `<!doctype html><html lang="${esc(book.metadata.language ?? "en")}" data-theme="${esc(theme)}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><style>${css}</style></head><body><div class="progress" aria-hidden="true"></div><main class="book-shell ${includeSolutions ? "solution-manual" : ""}"><header class="cover"><div class="label">${includeSolutions ? "Solutions manual" : "Textbook"}</div><h1>${esc(title)}</h1><p class="subtitle">${esc(book.metadata.subtitle ?? "")}</p><p class="meta">${esc(book.metadata.author ?? "")} · ${esc(book.metadata.version ?? "")}</p></header><section class="frontmatter"><h2>How to use this book</h2><p>${esc(book.learner?.summary ?? "Independent study")}</p><p><strong>Terminal performance:</strong> ${esc(book.learner?.terminal_performance ?? "")}</p><h3>Linear learning path</h3><ol>${pathItems}</ol></section><nav class="toc" aria-label="Table of contents"><h2>Contents</h2><ol>${toc}</ol></nav>${chapters}<section class="appendix" id="references"><h2>References</h2><ol>${refs || "<li>References pending review.</li>"}</ol></section></main><script>${runtime}</script></body></html>`;
 }
 try {
-  const book = JSON.parse(await read(path.join(project,"book.json"))); validateBook(book); const mods = await optionalModules(); const out = path.join(project,"dist"); await fs.mkdir(out,{recursive:true});
+  const book = JSON.parse(await read(path.join(project,"book.json")));
+  if (themeOverride) book.metadata = {...book.metadata, theme: themeOverride};
+  validateBook(book); const mods = await optionalModules(); const out = path.join(project,"dist"); await fs.mkdir(out,{recursive:true});
   const student = await makeHtml(book,false,mods); const solutions = await makeHtml(book,true,mods);
   await fs.writeFile(path.join(out,"textbook.html"),student); await fs.writeFile(path.join(out,"solutions.html"),solutions);
   const manifest = {title:book.metadata.title, version:book.metadata.version, status:book.metadata.status, theme:book.metadata.theme ?? "scholarly", input_hash:hash(JSON.stringify(book)), outputs:{textbook_html:hash(student),solutions_html:hash(solutions)}, built_at:new Date().toISOString()};

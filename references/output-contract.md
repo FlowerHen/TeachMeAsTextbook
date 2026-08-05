@@ -17,6 +17,8 @@ book-project/
 
 `node scripts/build.mjs --project <dir>` must:
 
+Use `--theme <name>` to preview or build one of the supported themes without editing `book.json`; the selected theme is written to the manifest and both HTML documents. The supported names are `scholarly`, `technical`, `editorial`, and `high-contrast`.
+
 - validate required metadata and unique IDs;
 - render math markers with local KaTeX when installed;
 - highlight only declared code languages;
@@ -33,7 +35,7 @@ Use `--allow-unrendered` only for drafts. A verified build fails on unresolved m
 
 ## Validation contract
 
-`node scripts/verify.mjs --project <dir> --strict` checks both HTMLs and PDFs, answer separation, heading structure, links, unresolved markers, remote resources, local path leakage, required IDs, and basic paper metadata. Visual review still requires opening the HTML and inspecting representative desktop, narrow, and PDF pages for the selected theme. Check that the theme changes visual treatment without changing content hierarchy, contrast, answer separation, or print readability.
+`node scripts/verify.mjs --project <dir> --strict` checks both HTMLs and PDFs, answer separation, heading structure, links, unresolved markers, remote resources, local path leakage, required IDs, theme consistency, and basic paper metadata. Pass the same `--theme <name>` override used during a preview build. Visual review still requires opening the HTML and inspecting representative desktop, narrow, and PDF pages for the selected theme. Check that the theme changes visual treatment without changing content hierarchy, contrast, answer separation, or print readability.
 
 ## Failure reporting
 

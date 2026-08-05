@@ -10,5 +10,5 @@
     "exercises": [{"id": "ch01.ex01", "type": "concept", "difficulty": 1, "objective_ids": ["ch01.obj01"], "expected_minutes": 10, "prompt_html": "<p>Exercise prompt.</p>", "answer_html": "<p>Final answer.</p>", "solution_html": "<p>Strategy, steps, verification, and common error.</p>"}]
   }],
   "references": [],
-  "review": {"facts": "pending", "math": "pending", "code": "pending", "pedagogy": "pending", "publication": "pending"}
+  "review": {"profile": "standard", "status": "draft", "facts": "pending", "math": "pending", "code": "pending", "pedagogy": "pending", "publication": "pending", "human": "pending"}
 }
