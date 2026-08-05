@@ -5,7 +5,7 @@
 ### Fixed
 
 - `verify.mjs` now accepts the same `--theme` override as `build.mjs`, so theme previews can pass strict validation without mutating the source book metadata.
-- Added `VERSION-COMPARISON.md` with a commit-grounded comparison of the initial and current content, workflow, supervision, and rendering models.
+- Added `VERSION-COMPARISON.md` and `VERSION-COMPARISON.zh-CN.md` with commit-grounded comparisons of the initial and current content, workflow, supervision, and rendering models.
 
 ## 0.3.0 - 2026-08-04
 

@@ -31,7 +31,7 @@ evals/
 assets/
 ```
 
-Read `SKILL.md` first. Load reference documents only when the workflow reaches the corresponding phase. For long-form books, always read `references/subagent-orchestration.md` before dispatching authors, exercise writers, editors, or reviewers. Read `references/human-style-and-feedback.md` when voice, naturalness, pacing, or user editorial feedback matters. See `VERSION-COMPARISON.md` for a detailed comparison between the initial and current workflow.
+Read `SKILL.md` first. Load reference documents only when the workflow reaches the corresponding phase. For long-form books, always read `references/subagent-orchestration.md` before dispatching authors, exercise writers, editors, or reviewers. Read `references/human-style-and-feedback.md` when voice, naturalness, pacing, or user editorial feedback matters. See `VERSION-COMPARISON.md` for the English comparison between the initial and current workflow, or `VERSION-COMPARISON.zh-CN.md` for the Chinese translation.
 
 ## Requirements
 
