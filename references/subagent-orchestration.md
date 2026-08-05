@@ -50,6 +50,27 @@ The solution editor receives frozen problem statements and an independent soluti
 
 A review Sub-agent reads the specified source and blueprint in a fresh, read-only context. It must not accept the author's self-check as evidence. It returns `pass`, `revise`, or `block`, with a location, problem, evidence, proposed fix, and recheck method.
 
+## Dispatch Decision and Coordination Budget
+
+Do not delegate a task merely because a Sub-agent is available. Keep work in the main Agent when the task is short, requires an unresolved user decision, depends on immediate conversational context, or would spend more tokens transferring context than doing the work. A focused local edit is usually cheaper and more coherent than a new author agent.
+
+Choose execution mode from dependencies:
+
+- **Parallel:** independent research, chapter drafts, or review dimensions that have different input/output artifacts and no ordering dependency.
+- **Sequential:** work where one artifact is an input to the next, such as blueprint -> draft -> review -> revision or problem freeze -> solution generation.
+- **Background:** research or validation that can finish without delaying a user decision, with a named result file, timeout, and completion check.
+
+Use a default concurrency cap of three or four agents for textbook work. Increase it only when artifacts are independent and the main Agent can merge the results without a coordination queue. Over-parallelizing small tasks wastes context and creates inconsistent terminology; under-parallelizing genuinely independent review dimensions wastes time.
+
+Every dispatch must include four things:
+
+1. **Scope:** the exact section, artifact, and files the agent may touch.
+2. **Context:** learner, objective, prerequisites, local terminology, source version, and relevant constraints.
+3. **Output:** the required Markdown/report schema, path, and completion marker.
+4. **Success criteria:** the checks that determine `pass`, `revise`, or `block`.
+
+Do not send vague requests such as “write the chapter” or “check quality.” When a revision is needed, resume or message the same agent when its context is useful; start a fresh agent only when independence, a changed role, or a clean re-evaluation is more valuable than continuity. Set a time/token budget and stop conditions for long tasks. A timed-out or incomplete response is `blocked` until a valid artifact and completion check exist.
+
 ## Long-Content Workflow
 
 ```text

@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.4.0 - 2026-08-05
+
+### Added
+
+- A skill self-check script for frontmatter, line count, referenced resources, templates, eval IDs, and machine-specific paths.
+- Sub-agent dispatch rules for delegation thresholds, execution mode, concurrency limits, complete invocation packets, resumption, and time budgets.
+
+### Changed
+
+- Shortened the frontmatter description to reduce discovery-time context while preserving trigger specificity.
+- Kept risk-scaled review and human checkpoints without adding another content-size category or another subjective score.
+
 ## 0.3.1 - 2026-08-04
 
 ### Fixed

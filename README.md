@@ -41,9 +41,10 @@ Read `SKILL.md` first. Load reference documents only when the workflow reaches t
 
 ## Core Build Commands
 
-Run these commands from a textbook project that follows the output contract:
+Run the skill self-check from the skill root, then run these commands from a textbook project that follows the output contract:
 
 ```bash
+node scripts/check-skill.mjs
 npm install
 node scripts/build.mjs --project path/to/book-project
 # Optional theme preview:
@@ -54,7 +55,7 @@ node scripts/verify.mjs --project path/to/book-project --strict
 node scripts/verify.mjs --project path/to/book-project --theme technical --strict
 ```
 
-Code examples and experiments must be marked `not executed` when the declared environment cannot run them. A generated document is not `verified` until the selected review profile, human checkpoints, and blocking evidence, mathematics, code, pedagogy, and publication findings are complete.
+Code examples and experiments must be marked `not executed` when the declared environment cannot run them. A generated document is not `verified` until the selected review profile, human checkpoints, and blocking evidence, mathematics, code, pedagogy, and publication findings are complete. Run `node scripts/check-skill.mjs` after changing the skill itself; run the project build and verify commands after changing a textbook project.
 
 ## Sub-agent Policy
 
